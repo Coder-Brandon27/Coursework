@@ -3,4 +3,4 @@ This is the coursework group project for software engineering methods
 [![LICENSE](https://img.shields.io/github/license/Coder-Brandon27/devops.svg?style=flat-square)](https://github.com/<Coder-Brandon27>/devops/blob/master/LICENSE)
 [![Releases](https://img.shields.io/github/release/Coder-Brandon27/devops/all.svg?style=flat-square)](https://github.com/<Coder-Brandon27>/devops/releases)
 # DevOps
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/Coder-Brandon27/Coursework/actions/workflows/main.yml/develop?style=flat-square)
+![GitHub branch status](https://img.shields.io/github/checks-status/Coder-Brandon27/Coursework/develop)
