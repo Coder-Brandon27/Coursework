@@ -1,1 +1,1 @@
-this is the setup for the class blah
+This is the coursework group project for software engineering methods
