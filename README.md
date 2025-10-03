@@ -1,7 +1,8 @@
 
 # software engineering methods group 9 project
 
-**description**: This is the coursework group project for software engineering methods 
+**description**: This is the coursework group project for software engineering methods.
+
 
 
 ![workflow](https://github.com/Coder-Brandon27/Coursework/actions/workflows/main.yml/badge.svg)
