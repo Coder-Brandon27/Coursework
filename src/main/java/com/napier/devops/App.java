@@ -1,10 +1,9 @@
+
 package com.napier.devops;
 
 import java.sql.*;
 
-/**
- * Demo App
- */
+
 public class App
 {
     public static void main(String[] args)
@@ -32,7 +31,7 @@ public class App
                 Thread.sleep(1000);
                 // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false&allowPublicKeyRetrieval=true", "root", "example");
-                System.out.println("Successfully connected");
+                System.out.println("Successfully connected :p");
                 // Wait a bit
                 Thread.sleep(1000);
                 // Exit for loop
