@@ -19,12 +19,11 @@ public class CityReports {
         List<City> cities = new ArrayList<>();
 
         // SQL query which selects city info and limits results to N
-        String sql = """
-            SELECT ID, Name, CountryCode, District, Population
-            FROM City
-            ORDER BY Population DESC
-            LIMIT ?
-        """;
+        String sql = "SELECT ID, Name, CountryCode, District, Population "
+           + "FROM City "
+           + "ORDER BY Population DESC "
+           + "LIMIT ?";
+
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             // Replace the ? in the SQL query with the number the user provides
@@ -61,11 +60,10 @@ public class CityReports {
         List<City> cities = new ArrayList<>();
 
         // SQL query that selects all cities and sorts them by population
-        String sql = """
-            SELECT ID, Name, CountryCode, District, Population
-            FROM City
-            ORDER BY Population DESC
-        """;
+        String sql = "SELECT ID, Name, CountryCode, District, Population "
+           + "FROM City "
+           + "ORDER BY Population DESC";
+
 
         try (
             // Create a Statement and run the query
