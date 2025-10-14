@@ -20,7 +20,7 @@ public class CityReports {
 
         // SQL query which selects city info and limits results to N
         String sql = "SELECT ID, Name, CountryCode, District, Population "
-           + "FROM City "
+           + "FROM city "
            + "ORDER BY Population DESC "
            + "LIMIT ?";
 
@@ -61,7 +61,7 @@ public class CityReports {
 
         // SQL query that selects all cities and sorts them by population
         String sql = "SELECT ID, Name, CountryCode, District, Population "
-           + "FROM City "
+           + "FROM city "
            + "ORDER BY Population DESC";
 
 
