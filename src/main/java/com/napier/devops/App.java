@@ -26,7 +26,13 @@ public class App {
             System.out.println("\nFirst 20 from full city list (descending population):");
             int limit = Math.min(20, allCities.size());
             reports.displayCities(allCities.subList(0, limit));
-                
+
+            //user story 3:
+            // Get the cities grouped by district
+             List<City> cities = reports.getCitiesByDistrict();
+             System.out.println("\n Cities in each district organised by largest to smallest population\n");
+            // Display them grouped by district and displays 1st 40 for readablity
+            reports.displayCitiesByDistrictGrouped(cities.subList(0, 40));
             db.close();
         } else {
             System.out.println("Connection failed after multiple attempts.");

@@ -100,4 +100,36 @@ public class CityReports {
             );
         }
     }
+    public List<City> getCitiesByDistrict() {
+        List<City> districts = new ArrayList<>();
+        try {
+            Statement stmt = con.createStatement();
+            String strSelect = "SELECT Name, District, Population "
+                    + "FROM city "
+                    + "ORDER BY District ASC, Population DESC";
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            while (rset.next()) {   // <-- Use while, not if
+                City c = new City();
+                c.setName(rset.getString("Name"));
+                c.setDistrict(rset.getString("District"));
+                c.setPopulation(rset.getLong("Population"));
+                districts.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in getCitiesByDistrict: " + e.getMessage());
+        }
+        return districts;
+    }
+    public void displayCitiesByDistrictGrouped(List<City> cities) {
+        String currentDistrict = "";
+        for (City c : cities) {
+            if (!c.getDistrict().equals(currentDistrict)) {
+                currentDistrict = c.getDistrict();
+                System.out.println("\nDistrict: " + currentDistrict);
+            }
+            System.out.println("  City: " + c.getName() + " | Population: " + c.getPopulation());
+        }
+    }
+
 }
