@@ -5,8 +5,8 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) {
-        DatabaseConnector db = new DatabaseConnector();
-        Connection con = db.connect();
+        DatabaseConnector db = new DatabaseConnector(); // new database instance
+        Connection con = db.connect(); // connect to the database
 
         if (con != null) {
             System.out.println("Connected to Database.");
@@ -31,8 +31,8 @@ public class App {
             // Get the cities grouped by district
              List<City> cities = reports.getCitiesByDistrict();
              System.out.println("\n Cities in each district organised by largest to smallest population\n");
-            // Display them grouped by district and displays 1st 40 for readablity
-            reports.displayCitiesByDistrictGrouped(cities.subList(0, 40));
+            // Display them grouped by district and displays
+            reports.displayCitiesByDistrictGrouped(cities);
             db.close();
         } else {
             System.out.println("Connection failed after multiple attempts.");

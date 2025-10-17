@@ -26,7 +26,7 @@ public class CityReports {
 
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
-            // Replace the ? in the SQL query with the number the user provides
+            // Replace the ? in the SQL query with the number the user provides.
             ps.setInt(1, n);
 
             // Execute the query and store the results
@@ -100,6 +100,7 @@ public class CityReports {
             );
         }
     }
+    //get the cities in each district and list them based on population largest to smallest
     public List<City> getCitiesByDistrict() {
         List<City> districts = new ArrayList<>();
         try {
@@ -108,8 +109,8 @@ public class CityReports {
                     + "FROM city "
                     + "ORDER BY District ASC, Population DESC";
             ResultSet rset = stmt.executeQuery(strSelect);
-
-            while (rset.next()) {   // <-- Use while, not if
+            //  Go through each result and turn it into a City object
+            while (rset.next()) {
                 City c = new City();
                 c.setName(rset.getString("Name"));
                 c.setDistrict(rset.getString("District"));
@@ -121,9 +122,10 @@ public class CityReports {
         }
         return districts;
     }
+    //creates a display for the objects
     public void displayCitiesByDistrictGrouped(List<City> cities) {
         String currentDistrict = "";
-        for (City c : cities) {
+        for (City c : cities) { //loops each district
             if (!c.getDistrict().equals(currentDistrict)) {
                 currentDistrict = c.getDistrict();
                 System.out.println("\nDistrict: " + currentDistrict);
