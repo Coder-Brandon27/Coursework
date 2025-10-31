@@ -13,6 +13,8 @@ public class App {
 
             //City reports object to access city related queries
             CityReports reports = new CityReports(con);
+            //Countires reports object to aceess country reports
+            CountryReport countryReport = new CountryReport(con);
 
             //USER STORY 1: Top N populated cities in the world
             int N = 10;
@@ -33,9 +35,19 @@ public class App {
              System.out.println("\n Cities in each district organised by largest to smallest population\n");
             // Display them grouped by district and displays
             reports.displayCitiesByDistrictGrouped(cities);
+
+            //user story 23:
+            // Gets the largest to smalled countries from selected region
+            System.out.println("\n List of all countries in a region listed from highest population to lowest");
+            List<Country> CountryLToS = CountryReport.RegionLargeToSmall("Western Europe");
+            countryReport.displayCountiresByLargestToSmallest(CountryLToS);
+
+
+
             db.close();
         } else {
             System.out.println("Connection failed after multiple attempts.");
         }
+
     }
 }
