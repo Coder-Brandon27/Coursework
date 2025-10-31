@@ -33,6 +33,12 @@ public class App {
              System.out.println("\n Cities in each district organised by largest to smallest population\n");
             // Display them grouped by district and displays
             reports.displayCitiesByDistrictGrouped(cities);
+
+
+// Example: view all cities in Japan
+            List<City> japanCities = reports.getCitiesByCountry("Japan");
+            reports.displayCitiesByCountry("Japan", japanCities);
+
             db.close();
         } else {
             System.out.println("Connection failed after multiple attempts.");
