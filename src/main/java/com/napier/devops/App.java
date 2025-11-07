@@ -35,7 +35,7 @@ public class App {
             reports.displayCitiesByDistrictGrouped(cities);
 
 
-// Example: view all cities in Japan
+// user story 33: view all cities in Japan
             List<City> japanCities = reports.getCitiesByCountry("Japan");
             reports.displayCitiesByCountry("Japan", japanCities);
 
