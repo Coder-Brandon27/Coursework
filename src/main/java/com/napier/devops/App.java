@@ -35,9 +35,58 @@ public class App {
             reports.displayCitiesByDistrictGrouped(cities);
 
 
-// user story 33: view all cities in Japan
+            // user story 33: view all cities in Japan
             List<City> japanCities = reports.getCitiesByCountry("Japan");
             reports.displayCitiesByCountry("Japan", japanCities);
+
+
+            /**
+             * all the population reports
+             */
+            // Create an instance of PopulationReports with the database connection
+            PopulationReports popReports = new PopulationReports(con);
+
+           //Get population breakdown by continent
+            System.out.println("=== CONTINENT POPULATION REPORTS ===");
+            List<Population> continentReports = popReports.getPopulationByContinent();
+            popReports.displayPopulationReports(continentReports, "Continent");
+
+            //Get population breakdown by region
+            System.out.println("\n=== REGION POPULATION REPORTS ===");
+            List<Population> regionReports = popReports.getPopulationByRegion();
+            popReports.displayPopulationReports(regionReports, "Region");
+
+            //Get population breakdown by country
+            System.out.println("\n=== COUNTRY POPULATION REPORTS ===");
+            List<Population> countryReports = popReports.getPopulationByCountry();
+            popReports.displayPopulationReports(countryReports, "Country");
+
+            //Get world population
+            long worldPop = popReports.getWorldPopulation();
+            popReports.displayPopulation("World", worldPop);
+
+            //Get continent population
+            long asiaPop = popReports.getContinentPopulation("Asia");
+            popReports.displayPopulation("Asia", asiaPop);
+
+            //Get region population
+            long caribbeanPop = popReports.getRegionPopulation("Caribbean");
+            popReports.displayPopulation("Caribbean", caribbeanPop);
+
+            //Get country population
+            long ukPop = popReports.getCountryPopulation("United Kingdom");
+            popReports.displayPopulation("United Kingdom", ukPop);
+
+            //Get district population
+            long englandPop = popReports.getDistrictPopulation("England");
+            popReports.displayPopulation("England District", englandPop);
+
+            //Get city population
+            long londonPop = popReports.getCityPopulation("London");
+            popReports.displayPopulation("London", londonPop);
+
+
+
 
             db.close();
         } else {
