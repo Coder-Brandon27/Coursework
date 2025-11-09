@@ -29,16 +29,24 @@ public class App {
 
             //user story 3:
             // Get the cities grouped by district
-             List<City> cities = reports.getCitiesByDistrict();
-             System.out.println("\n Cities in each district organised by largest to smallest population\n");
+            List<City> cities = reports.getCitiesByDistrict();
+            System.out.println("\n Cities in each district organised by largest to smallest population\n");
             // Display them grouped by district and displays
             reports.displayCitiesByDistrictGrouped(cities);
 
+            //user story 4:
+            //Top N populated countries in a continent
+            CountryReports countryReportService = new CountryReports(con);
+            String continent = "Asia";   // change this to "Europe", "Africa", etc.
+            int countryN = 10;           // this is the “N is provided by me” part
+            System.out.println("\nTop " + countryN + " most populated countries in " + continent + ":");
+            countryReportService.displayCountries(
+                    countryReportService.getTopCountriesInContinent(continent, countryN)
+            );
 
             // user story 33: view all cities in Japan
             List<City> japanCities = reports.getCitiesByCountry("Japan");
             reports.displayCitiesByCountry("Japan", japanCities);
-
 
             /**
              * all the population reports
@@ -46,7 +54,7 @@ public class App {
             // Create an instance of PopulationReports with the database connection
             PopulationReports popReports = new PopulationReports(con);
 
-           //Get population breakdown by continent
+            //Get population breakdown by continent
             System.out.println("=== CONTINENT POPULATION REPORTS ===");
             List<Population> continentReports = popReports.getPopulationByContinent();
             popReports.displayPopulationReports(continentReports, "Continent");
@@ -85,12 +93,12 @@ public class App {
             long londonPop = popReports.getCityPopulation("London");
             popReports.displayPopulation("London", londonPop);
 
-
-
-
             db.close();
         } else {
             System.out.println("Connection failed after multiple attempts.");
         }
     }
 }
+
+
+        
