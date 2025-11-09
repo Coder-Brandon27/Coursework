@@ -36,12 +36,12 @@ public class App {
 
             //user story 4:
             //Top N populated countries in a continent
-            CountryReports countryReports = new CountryReports(con);
+            CountryReports countryReportService = new CountryReports(con);
             String continent = "Asia";   // change this to "Europe", "Africa", etc.
             int countryN = 10;           // this is the “N is provided by me” part
             System.out.println("\nTop " + countryN + " most populated countries in " + continent + ":");
-            countryReports.displayCountries(
-                    countryReports.getTopCountriesInContinent(continent, countryN)
+            countryReportService.displayCountries(
+                    countryReportService.getTopCountriesInContinent(continent, countryN)
             );
 
             // user story 33: view all cities in Japan
@@ -99,5 +99,6 @@ public class App {
         }
     }
 }
+
 
         
