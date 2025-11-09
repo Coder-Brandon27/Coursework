@@ -20,9 +20,9 @@ public class CityReports {
 
         // SQL query which selects city info and limits results to N
         String sql = "SELECT ID, Name, CountryCode, District, Population "
-           + "FROM city "
-           + "ORDER BY Population DESC "
-           + "LIMIT ?";
+                + "FROM city "
+                + "ORDER BY Population DESC "
+                + "LIMIT ?";
 
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -61,14 +61,14 @@ public class CityReports {
 
         // SQL query that selects all cities and sorts them by population
         String sql = "SELECT ID, Name, CountryCode, District, Population "
-           + "FROM city "
-           + "ORDER BY Population DESC";
+                + "FROM city "
+                + "ORDER BY Population DESC";
 
 
         try (
-            // Create a Statement and run the query
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql)
+                // Create a Statement and run the query
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)
         ) {
             // Go through each result and turn it into a City object
             while (rs.next()) {
@@ -93,13 +93,14 @@ public class CityReports {
     public void displayCities(List<City> cities) {
         for (City c : cities) {
             System.out.println(
-                c.getName() + " | " +
-                c.getCountryCode() + " | " +
-                c.getDistrict() + " | " +
-                c.getPopulation()
+                    c.getName() + " | " +
+                            c.getCountryCode() + " | " +
+                            c.getDistrict() + " | " +
+                            c.getPopulation()
             );
         }
     }
+
     //get the cities in each district and list them based on population largest to smallest
     public List<City> getCitiesByDistrict() {
         List<City> districts = new ArrayList<>();
@@ -122,6 +123,7 @@ public class CityReports {
         }
         return districts;
     }
+
     //creates a display for the objects
     public void displayCitiesByDistrictGrouped(List<City> cities) {
         String currentDistrict = "";
@@ -133,5 +135,47 @@ public class CityReports {
             System.out.println("  City: " + c.getName() + " | Population: " + c.getPopulation());
         }
     }
+    // Gets all the cities in a given country, ordered by largest to smallest population
+    public List<City> getCitiesByCountry(String countryName) {
+        List<City> cities = new ArrayList<>();
+
+        // SQL query to join the City and Country tables by CountryCode
+        String sql = "SELECT city.ID, city.Name, city.CountryCode, city.District, city.Population " +
+                "FROM city " +
+                "JOIN country ON city.CountryCode = country.Code " +
+                "WHERE country.Name = ? " +
+                "ORDER BY city.Population DESC";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, countryName);
+
+            // Execute the query
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    City c = new City();
+                    c.setId(rs.getLong("ID"));
+                    c.setName(rs.getString("Name"));
+                    c.setCountryCode(rs.getString("CountryCode"));
+                    c.setDistrict(rs.getString("District"));
+                    c.setPopulation(rs.getLong("Population"));
+                    cities.add(c);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in getCitiesByCountry: " + e.getMessage());
+        }
+
+        return cities;
+    }
+    public void displayCitiesByCountry(String countryName, List<City> cities) {
+        System.out.println("\nCities in " + countryName + " (largest to smallest population):");
+        for (City c : cities) {
+            System.out.println("  " + c.getName() + " | " + c.getDistrict() + " | Pop: " + c.getPopulation());
+        }
+    }
+
+
+
+
 
 }

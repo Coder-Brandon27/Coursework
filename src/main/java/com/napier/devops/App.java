@@ -29,15 +29,14 @@ public class App {
 
             //user story 3:
             // Get the cities grouped by district
-             List<City> cities = reports.getCitiesByDistrict();
-             System.out.println("\n Cities in each district organised by largest to smallest population\n");
+            List<City> cities = reports.getCitiesByDistrict();
+            System.out.println("\n Cities in each district organised by largest to smallest population\n");
             // Display them grouped by district and displays
             reports.displayCitiesByDistrictGrouped(cities);
 
-
+            //user story 4:
+            //Top N populated countries in a continent
             CountryReports countryReports = new CountryReports(con);
-
-            // USER STORY 1: Top N populated countries in a continent
             String continent = "Asia";   // change this to "Europe", "Africa", etc.
             int countryN = 10;           // this is the “N is provided by me” part
             System.out.println("\nTop " + countryN + " most populated countries in " + continent + ":");
@@ -45,11 +44,60 @@ public class App {
                     countryReports.getTopCountriesInContinent(continent, countryN)
             );
 
-            // close DB connection at the end
+            // user story 33: view all cities in Japan
+            List<City> japanCities = reports.getCitiesByCountry("Japan");
+            reports.displayCitiesByCountry("Japan", japanCities);
+
+            /**
+             * all the population reports
+             */
+            // Create an instance of PopulationReports with the database connection
+            PopulationReports popReports = new PopulationReports(con);
+
+            //Get population breakdown by continent
+            System.out.println("=== CONTINENT POPULATION REPORTS ===");
+            List<Population> continentReports = popReports.getPopulationByContinent();
+            popReports.displayPopulationReports(continentReports, "Continent");
+
+            //Get population breakdown by region
+            System.out.println("\n=== REGION POPULATION REPORTS ===");
+            List<Population> regionReports = popReports.getPopulationByRegion();
+            popReports.displayPopulationReports(regionReports, "Region");
+
+            //Get population breakdown by country
+            System.out.println("\n=== COUNTRY POPULATION REPORTS ===");
+            List<Population> countryReports = popReports.getPopulationByCountry();
+            popReports.displayPopulationReports(countryReports, "Country");
+
+            //Get world population
+            long worldPop = popReports.getWorldPopulation();
+            popReports.displayPopulation("World", worldPop);
+
+            //Get continent population
+            long asiaPop = popReports.getContinentPopulation("Asia");
+            popReports.displayPopulation("Asia", asiaPop);
+
+            //Get region population
+            long caribbeanPop = popReports.getRegionPopulation("Caribbean");
+            popReports.displayPopulation("Caribbean", caribbeanPop);
+
+            //Get country population
+            long ukPop = popReports.getCountryPopulation("United Kingdom");
+            popReports.displayPopulation("United Kingdom", ukPop);
+
+            //Get district population
+            long englandPop = popReports.getDistrictPopulation("England");
+            popReports.displayPopulation("England District", englandPop);
+
+            //Get city population
+            long londonPop = popReports.getCityPopulation("London");
+            popReports.displayPopulation("London", londonPop);
+
             db.close();
         } else {
             System.out.println("Connection failed after multiple attempts.");
         }
     }
 }
+
         
