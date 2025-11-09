@@ -33,9 +33,23 @@ public class App {
              System.out.println("\n Cities in each district organised by largest to smallest population\n");
             // Display them grouped by district and displays
             reports.displayCitiesByDistrictGrouped(cities);
+
+
+            CountryReports countryReports = new CountryReports(con);
+
+            // USER STORY 1: Top N populated countries in a continent
+            String continent = "Asia";   // change this to "Europe", "Africa", etc.
+            int countryN = 10;           // this is the “N is provided by me” part
+            System.out.println("\nTop " + countryN + " most populated countries in " + continent + ":");
+            countryReports.displayCountries(
+                    countryReports.getTopCountriesInContinent(continent, countryN)
+            );
+
+            // close DB connection at the end
             db.close();
         } else {
             System.out.println("Connection failed after multiple attempts.");
         }
     }
 }
+        
