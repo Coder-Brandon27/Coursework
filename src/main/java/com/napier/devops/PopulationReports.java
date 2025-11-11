@@ -25,6 +25,7 @@ public class PopulationReports {
     }
 
     // Gets population breakdown for each continent (urban vs rural)
+
     public List<Population> getPopulationByContinent() {
         List<Population> reports = new ArrayList<>();
 
