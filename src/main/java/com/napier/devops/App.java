@@ -37,8 +37,8 @@ public class App {
             //user story 4:
             //Top N populated countries in a continent
             CountryReports countryReportService = new CountryReports(con);
-            String continent = "Asia";   // change this to "Europe", "Africa", etc.
-            int countryN = 10;           // this is the “N is provided by me” part
+            String continent = "Asia";
+            int countryN = 10;
             System.out.println("\nTop " + countryN + " most populated countries in " + continent + ":");
             countryReportService.displayCountries(
                     countryReportService.getTopCountriesInContinent(continent, countryN)
@@ -48,9 +48,6 @@ public class App {
             List<City> japanCities = reports.getCitiesByCountry("Japan");
             reports.displayCitiesByCountry("Japan", japanCities);
 
-            /**
-             * all the population reports
-             */
             // Create an instance of PopulationReports with the database connection
             PopulationReports popReports = new PopulationReports(con);
 
