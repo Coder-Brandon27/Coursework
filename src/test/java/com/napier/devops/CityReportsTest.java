@@ -59,6 +59,21 @@ void getCitiesByCountry_ValidCountry_ReturnsCities() {
     assertFalse(cities.isEmpty());         // should have at least one city
 }
 
+// Test 5: cities should be sorted by population in descending order
+@Test
+void getCitiesByCountry_ValidCountry_IsSortedDescending() {
+    List<City> cities = cityReports.getCitiesByCountry("Japan");
+
+    assertNotNull(cities);
+    assertTrue(cities.size() > 1);    // Must have more than one city to test sorting
+
+    // Check that each city has a population <= the previous one
+    for (int i = 1; i < cities.size(); i++) {
+        long prev = cities.get(i - 1).getPopulation();
+        long current = cities.get(i).getPopulation();
+        assertTrue(prev >= current, "Cities are not sorted in descending order.");
+    }
+}
 
 
     
