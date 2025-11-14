@@ -114,6 +114,12 @@ void displayCities_ValidList_DoesNotThrow() {
     cityReports.displayCities(cityList);   // should not crash
 }
 
+// Test 10: displayCity should handle a null city without crashing
+@Test
+void displayCity_NullCity_DoesNotThrow() {
+    cityReports.displayCity(null);   // should not crash
+}
+
 
 
 }
