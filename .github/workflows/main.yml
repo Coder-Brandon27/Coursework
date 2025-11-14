@@ -33,7 +33,7 @@ jobs:
       - name: Integration Tests
         run: |
           docker build -t world ./db
-          docker run --name world-container -dp 33060:3306 worlddb
+          docker run --name world-container -dp 33060:3306 world
           mvn -Dtest=com.napier.devops.PopulationReportsTest test
           docker stop world-container
           docker rm world-container
