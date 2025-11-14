@@ -15,15 +15,19 @@ public class PopulationReportsTest {
     private static Connection con;
     private static PopulationReports populationReports;
 
+
+
     /**
      * Sets up database connection before all tests run.
      */
-
-
     @BeforeAll
     public static void init() {
-        DatabaseConnector db = new DatabaseConnector(); // new database instance
-        Connection con = db.connect(); // connect to the database
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=false", "root", "example");
+            populationReports = new PopulationReports(con);
+        } catch (Exception e) {
+            System.out.println("Failed to connect to database: " + e.getMessage());
+        }
     }
 
     /**
