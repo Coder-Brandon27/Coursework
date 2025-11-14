@@ -98,6 +98,23 @@ void displayCities_ListWithNullEntry_DoesNotThrow() {
     cityReports.displayCities(listWithNull);   // should not crash
 }
 
+// Test 9: displayCities should handle a normal list without crashing
+@Test
+void displayCities_ValidList_DoesNotThrow() {
+    List<City> cityList = new ArrayList<>();
+
+    City c = new City();
+    c.setName("Tokyo");
+    c.setCountryCode("JPN");
+    c.setDistrict("Tokyo");
+    c.setPopulation(13929286);
+
+    cityList.add(c);
+
+    cityReports.displayCities(cityList);   // should not crash
+}
+
+
 
 }
 
