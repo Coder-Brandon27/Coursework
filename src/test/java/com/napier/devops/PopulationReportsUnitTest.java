@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * JUnit4 tests for PopulationReports that avoid SQL and mocking.
  * These tests only cover methods that do not rely on a real database.
  */
 public class PopulationReportsUnitTest {
