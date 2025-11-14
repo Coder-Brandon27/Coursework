@@ -268,7 +268,7 @@ public class PopulationReportsTest {
     }
 
     /**
-     * Tests that displayPopulationReports handles null input gracefully.
+     * Tests that displayPopulationReports handles null input.
      */
     @Test
     public void testDisplayPopulationReportsNull() {

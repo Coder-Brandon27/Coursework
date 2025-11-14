@@ -66,7 +66,9 @@ public class App {
             List<Population> countryReports = popReports.getPopulationByCountry();
             popReports.displayPopulationReports(countryReports, "Country");
 
-            //Get world population
+            /**
+             * get world population report
+             */
             long worldPop = popReports.getWorldPopulation();
             popReports.displayPopulation("World", worldPop);
 
