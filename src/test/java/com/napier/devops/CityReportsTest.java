@@ -89,6 +89,16 @@ public class CityReportsTest {
     cityReports.displayCities(emptyList);   // should not crash
 }
 
+// Test 8: displayCities should handle a list containing a null entry
+@Test
+void displayCities_ListWithNullEntry_DoesNotThrow() {
+    List<City> listWithNull = new ArrayList<>();
+    listWithNull.add(null);   // add a single null city
+
+    cityReports.displayCities(listWithNull);   // should not crash
+}
+
+
 }
 
 
