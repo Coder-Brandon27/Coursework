@@ -40,6 +40,16 @@ void getCitiesByCountry_EmptyCountry_ReturnsEmptyList() {
     assertEquals(0, cities.size());    // should be empty
 }
 
+    // Test 3: invalid country name should return an empty list
+@Test
+void getCitiesByCountry_InvalidCountry_ReturnsEmptyList() {
+    List<City> cities = cityReports.getCitiesByCountry("Narnia");  // not a real country
+
+    assertNotNull(cities);             // still must not return null
+    assertEquals(0, cities.size());    // should be empty list
+}
+
+
     
 
 }
