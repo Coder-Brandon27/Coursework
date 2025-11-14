@@ -22,12 +22,10 @@ public class PopulationReportsTest {
      */
     @BeforeAll
     public static void init() {
-        try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=false", "root", "example");
-            populationReports = new PopulationReports(con);
-        } catch (Exception e) {
-            System.out.println("Failed to connect to database: " + e.getMessage());
-        }
+        DatabaseConnector db = new DatabaseConnector(); // new database instance
+        con = db.connect("localhost:33060", 30000);
+        populationReports = new PopulationReports(con);
+
     }
 
     /**

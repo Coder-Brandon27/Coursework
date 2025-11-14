@@ -6,8 +6,12 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
         DatabaseConnector db = new DatabaseConnector(); // new database instance
-        Connection con = db.connect(); // connect to the database
-
+        Connection con ;
+        if(args.length < 1){
+            con = db.connect("localhost:33060", 30000);
+        }else{
+            con = db.connect(args[0], Integer.parseInt(args[1]));
+        }
         if (con != null) {
             System.out.println("Connected to Database.");
 
@@ -66,9 +70,7 @@ public class App {
             List<Population> countryReports = popReports.getPopulationByCountry();
             popReports.displayPopulationReports(countryReports, "Country");
 
-            /**
-             * get world population report
-             */
+           //world population
             long worldPop = popReports.getWorldPopulation();
             popReports.displayPopulation("World", worldPop);
 

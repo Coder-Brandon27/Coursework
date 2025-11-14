@@ -16,7 +16,7 @@ public class CityReportsTest {
     @BeforeAll
     static void init() {
         db = new DatabaseConnector();
-        Connection con = db.connect();
+        Connection con = db.connect("localhost:33060", 30000);
 
         // If database is not running (GitHub Actions), skip tests
         if (con == null) {
