@@ -68,6 +68,137 @@ public class CountryReports {
             );
         }
     }
+
+    //user story 23
+    public List<Country> RegionLargeToSmall(String n) {
+        List<Country> countries = new ArrayList<>();
+        String sql = "SELECT name, continent, region, population " +
+                "FROM country " +
+                "WHERE region = ? " +
+                "ORDER BY population DESC";
+
+        try(PreparedStatement ps = con.prepareStatement(sql)){
+            ps.setString(1, n);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    // Create a new country object for each row
+                    Country c = new Country();
+                    c.setName(rs.getString("Name"));
+                    c.setContinent(rs.getString("Continent"));
+                    c.setRegion(rs.getString("Region"));
+                    c.setPopulation(rs.getLong("Population"));
+
+                    // Add the City object to the list
+                    countries.add(c);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error has occured while trying to load country. " + e.getMessage());
+        }
+        return countries;
+    }
+
+    //user story 24
+    public List<Country> getTopNCountriesByPopulation(int n) {
+        List<Country> countries = new ArrayList<>();
+        String sql = "SELECT Name, Continent, Region, Population " +
+                "FROM country " +
+                "ORDER BY Population DESC " +
+                "LIMIT ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, n);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Country c = new Country();
+                    c.setName(rs.getString("Name"));
+                    c.setContinent(rs.getString("Continent"));
+                    c.setRegion(rs.getString("Region"));
+                    c.setPopulation(rs.getInt("Population"));
+                    countries.add(c);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error has occurred while trying to load top N countries. " + e.getMessage());
+        }
+
+        return countries;
+    }
+
+
+
+    //user story 23
+    public void displayCountiresByLargestToSmallest(List<Country> countries) {
+        System.out.println("Name | Continent | Region | Population");
+        System.out.println("--------------------------------------------------");
+        for (Country c : countries) {
+            System.out.println(
+                    c.getName() + " | " +
+                            c.getContinent() + " | " +
+                            c.getRegion() + " | " +
+                            c.getPopulation()
+            );
+        }
+    }
+
+    public void displayTopNPop(List<Country> countries) {
+        System.out.println("Name | Continent | Region | Population");
+        System.out.println("--------------------------------------------------");
+        for (Country c : countries) {
+            System.out.println(
+                    c.getName() + " | " +
+                            c.getContinent() + " | " +
+                            c.getRegion() + " | " +
+                            c.getPopulation()
+            );
+        }
+    }
+
+    //use case 26
+    public List<Country> TopNCountriesByRegions(String region, int n) {
+        List<Country> countries = new ArrayList<>();
+        String sql = "SELECT Code, Name, Continent, Region, Population " +
+                "FROM country " +
+                "WHERE Region = ? " +
+                "ORDER BY Population DESC " +
+                "LIMIT ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, region);
+            ps.setInt(2, n);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Country c = new Country();
+                    c.setCode(rs.getString("Code"));
+                    c.setName(rs.getString("Name"));
+                    c.setContinent(rs.getString("Continent"));
+                    c.setRegion(rs.getString("Region"));
+                    c.setPopulation(rs.getInt("Population"));
+                    countries.add(c);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error has occurred while trying to load top N countries by region. " + e.getMessage());
+        }
+
+        return countries;
+    }
+
+    public void displayTopNPopRegion(List<Country> countries) {
+        System.out.println("Name | Continent | Region | Population");
+        System.out.println("--------------------------------------------------");
+        for (Country c : countries) {
+            System.out.println(
+                    c.getName() + " | " +
+                            c.getContinent() + " | " +
+                            c.getRegion() + " | " +
+                            c.getPopulation()
+            );
+        }
+    }
+
+
+
 }
 
 

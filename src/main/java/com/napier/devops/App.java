@@ -17,7 +17,6 @@ public class App {
 
             //City reports object to access city related queries
             CityReports reports = new CityReports(con);
-
             //USER STORY 1: Top N populated cities in the world
             int N = 10;
             List<City> topCities = reports.getTopCities(N);
@@ -93,6 +92,24 @@ public class App {
             //Get city population
             long londonPop = popReports.getCityPopulation("London");
             popReports.displayPopulation("London", londonPop);
+
+            //user story 23:
+            // Gets the largest to smalled countries from selected region
+            System.out.println("\n List of all countries in a region listed from highest population to lowest");
+            List<Country> CountryLToS = countryReportService.RegionLargeToSmall("Western Europe");
+            countryReportService.displayCountiresByLargestToSmallest(CountryLToS);
+
+            //user story 24:
+            // Lists the top n countries around the world by population
+            System.out.println("\n Lists the top N countries around the world by population");
+            List<Country> CountryTopNPop = countryReportService.getTopNCountriesByPopulation(5);
+            countryReportService.displayTopNPop(CountryTopNPop);
+
+            //user story 26:
+            // Lists the top n countries by population of a select region
+            System.out.println("\n Lists the top N countries around the world by population");
+            List<Country> CountryTopNPopRegion = countryReportService.TopNCountriesByRegions("Western Europe", 5);
+            countryReportService.displayTopNPopRegion(CountryTopNPopRegion);
 
             db.close();
         } else {
