@@ -89,17 +89,28 @@ public class CityReports {
         return cities;
     }
 
-    // Prints out each city to the console 
-    public void displayCities(List<City> cities) {
-        for (City c : cities) {
-            System.out.println(
-                    c.getName() + " | " +
-                            c.getCountryCode() + " | " +
-                            c.getDistrict() + " | " +
-                            c.getPopulation()
-            );
-        }
+   // Print a list of cities safely
+public void displayCities(List<City> cities) {
+    // If list is null, stop here
+    if (cities == null) {
+        System.out.println("No cities to display.");
+        return;
     }
+
+    // Print each city (skip null items)
+    for (City c : cities) {
+        if (c == null)
+            continue;
+
+        System.out.println(
+                c.getName() + " | " +
+                c.getCountryCode() + " | " +
+                c.getDistrict() + " | " +
+                c.getPopulation()
+        );
+    }
+}
+
 
     //get the cities in each district and list them based on population largest to smallest
     public List<City> getCitiesByDistrict() {
