@@ -22,7 +22,7 @@ public class CityReportsTest {
         cityReports = new CityReports(con);     // create object to test
     }
 
-    // Test: null country should return an empty list
+    // Test 1: null country should return an empty list
     @Test
     void getCitiesByCountry_NullCountry_ReturnsEmptyList() {
         List<City> cities = cityReports.getCitiesByCountry(null);
@@ -30,5 +30,17 @@ public class CityReportsTest {
         assertNotNull(cities);                  // method must not return null
         assertEquals(0, cities.size());         // should be empty
     }
+
+    // Test 2: empty country string should return an empty list
+@Test
+void getCitiesByCountry_EmptyCountry_ReturnsEmptyList() {
+    List<City> cities = cityReports.getCitiesByCountry("");
+
+    assertNotNull(cities);             // method must not return null
+    assertEquals(0, cities.size());    // should be empty
+}
+
+    
+
 }
 
