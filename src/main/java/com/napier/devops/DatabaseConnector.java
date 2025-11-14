@@ -5,7 +5,7 @@ import java.sql.*;
 public class DatabaseConnector {
     private Connection connection;
 
-    public Connection connect() {
+    public Connection connect(String location, int delay) {
         try {
             // Load MySQL driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -14,13 +14,13 @@ public class DatabaseConnector {
             return null;
         }
 
-        int retries = 100;
+        int retries = 10;
         for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
             try {
-                Thread.sleep(1000); // Wait for db to start
+                Thread.sleep(delay); // Wait for db to start
                 connection = DriverManager.getConnection(
-                        "jdbc:mysql://db:3306/world?useSSL=false&allowPublicKeyRetrieval=true",
+                        "jdbc:mysql://"+ location + "/world?useSSL=false&allowPublicKeyRetrieval=true",
                         "root",
                         "example"
                 );

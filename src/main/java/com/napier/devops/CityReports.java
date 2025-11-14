@@ -6,43 +6,35 @@ import java.util.List;
 
 public class CityReports {
 
-    // Connection to the database
+    // Database connection
     private final Connection con;
 
-    // Constructor sets up the connection so we can use it in the methods below
+    // Save connection so all methods can use it
     public CityReports(Connection con) {
         this.con = con;
     }
 
-    // Gets the top N most populated cities in the world
+    // Get top N most populated cities in the world
     public List<City> getTopCities(int n) {
         List<City> cities = new ArrayList<>();
 
-        // SQL query which selects city info and limits results to N
         String sql = "SELECT ID, Name, CountryCode, District, Population "
                 + "FROM city "
                 + "ORDER BY Population DESC "
                 + "LIMIT ?";
 
-
         try (PreparedStatement ps = con.prepareStatement(sql)) {
-            // Replace the ? in the SQL query with the number the user provides.
             ps.setInt(1, n);
 
-            // Execute the query and store the results
             try (ResultSet rs = ps.executeQuery()) {
-
-                // Go through each row returned by the database
+                // Build each City object
                 while (rs.next()) {
-                    // Create a new City object for each row
                     City c = new City();
                     c.setId(rs.getLong("ID"));
                     c.setName(rs.getString("Name"));
                     c.setCountryCode(rs.getString("CountryCode"));
                     c.setDistrict(rs.getString("District"));
                     c.setPopulation(rs.getLong("Population"));
-
-                    // Add the City object to the list
                     cities.add(c);
                 }
             }
@@ -51,26 +43,21 @@ public class CityReports {
             System.out.println("Error in getTopCities: " + e.getMessage());
         }
 
-        // Return the list of cities
         return cities;
     }
 
-    // Gets all cities in the world, ordered by population (largest to smallest)
+    // Get all cities sorted by population
     public List<City> getAllCities() {
         List<City> cities = new ArrayList<>();
 
-        // SQL query that selects all cities and sorts them by population
         String sql = "SELECT ID, Name, CountryCode, District, Population "
                 + "FROM city "
                 + "ORDER BY Population DESC";
 
-
         try (
-                // Create a Statement and run the query
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(sql)
         ) {
-            // Go through each result and turn it into a City object
             while (rs.next()) {
                 City c = new City();
                 c.setId(rs.getLong("ID"));
@@ -85,34 +72,32 @@ public class CityReports {
             System.out.println("Error in getAllCities: " + e.getMessage());
         }
 
-        // Return the full list of cities
         return cities;
     }
 
-   // Print a list of cities safely
-public void displayCities(List<City> cities) {
-    // If list is null, stop here
-    if (cities == null) {
-        System.out.println("No cities to display.");
-        return;
+    // Print a list of cities safely
+    public void displayCities(List<City> cities) {
+        // If list is null, stop here
+        if (cities == null) {
+            System.out.println("No cities to display.");
+            return;
+        }
+
+        // Print each city (skip null items)
+        for (City c : cities) {
+            if (c == null)
+                continue;
+
+            System.out.println(
+                    c.getName() + " | " +
+                    c.getCountryCode() + " | " +
+                    c.getDistrict() + " | " +
+                    c.getPopulation()
+            );
+        }
     }
 
-    // Print each city (skip null items)
-    for (City c : cities) {
-        if (c == null)
-            continue;
-
-        System.out.println(
-                c.getName() + " | " +
-                c.getCountryCode() + " | " +
-                c.getDistrict() + " | " +
-                c.getPopulation()
-        );
-    }
-}
-
-
-    //get the cities in each district and list them based on population largest to smallest
+    // Get cities grouped by district
     public List<City> getCitiesByDistrict() {
         List<City> districts = new ArrayList<>();
         try {
@@ -120,8 +105,9 @@ public void displayCities(List<City> cities) {
             String strSelect = "SELECT Name, District, Population "
                     + "FROM city "
                     + "ORDER BY District ASC, Population DESC";
+
             ResultSet rset = stmt.executeQuery(strSelect);
-            //  Go through each result and turn it into a City object
+
             while (rset.next()) {
                 City c = new City();
                 c.setName(rset.getString("Name"));
@@ -129,28 +115,33 @@ public void displayCities(List<City> cities) {
                 c.setPopulation(rset.getLong("Population"));
                 districts.add(c);
             }
+
         } catch (SQLException e) {
             System.out.println("Error in getCitiesByDistrict: " + e.getMessage());
         }
+
         return districts;
     }
 
-    //creates a display for the objects
+    // Print cities grouped by district
     public void displayCitiesByDistrictGrouped(List<City> cities) {
         String currentDistrict = "";
-        for (City c : cities) { //loops each district
+
+        for (City c : cities) {
+            // New district header
             if (!c.getDistrict().equals(currentDistrict)) {
                 currentDistrict = c.getDistrict();
                 System.out.println("\nDistrict: " + currentDistrict);
             }
+
             System.out.println("  City: " + c.getName() + " | Population: " + c.getPopulation());
         }
     }
-    // Gets all the cities in a given country, ordered by largest to smallest population
+
+    // Get all cities in a country sorted by population
     public List<City> getCitiesByCountry(String countryName) {
         List<City> cities = new ArrayList<>();
 
-        // SQL query to join the City and Country tables by CountryCode
         String sql = "SELECT city.ID, city.Name, city.CountryCode, city.District, city.Population " +
                 "FROM city " +
                 "JOIN country ON city.CountryCode = country.Code " +
@@ -160,7 +151,6 @@ public void displayCities(List<City> cities) {
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, countryName);
 
-            // Execute the query
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     City c = new City();
@@ -178,15 +168,18 @@ public void displayCities(List<City> cities) {
 
         return cities;
     }
+
+    // Print cities for a specific country
     public void displayCitiesByCountry(String countryName, List<City> cities) {
         System.out.println("\nCities in " + countryName + " (largest to smallest population):");
+
         for (City c : cities) {
-            System.out.println("  " + c.getName() + " | " + c.getDistrict() + " | Pop: " + c.getPopulation());
+            System.out.println(
+                    "  " + c.getName() + " | " +
+                    c.getDistrict() + " | Pop: " + c.getPopulation()
+            );
         }
     }
-
-
-
-
-
 }
+
+

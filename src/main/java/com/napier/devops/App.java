@@ -6,8 +6,12 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
         DatabaseConnector db = new DatabaseConnector(); // new database instance
-        Connection con = db.connect(); // connect to the database
-
+        Connection con ;
+        if(args.length < 1){
+            con = db.connect("localhost:33060", 30000);
+        }else{
+            con = db.connect(args[0], Integer.parseInt(args[1]));
+        }
         if (con != null) {
             System.out.println("Connected to Database.");
 
@@ -37,8 +41,8 @@ public class App {
             //user story 4:
             //Top N populated countries in a continent
             CountryReports countryReportService = new CountryReports(con);
-            String continent = "Asia";   // change this to "Europe", "Africa", etc.
-            int countryN = 10;           // this is the “N is provided by me” part
+            String continent = "Asia";
+            int countryN = 10;
             System.out.println("\nTop " + countryN + " most populated countries in " + continent + ":");
             countryReportService.displayCountries(
                     countryReportService.getTopCountriesInContinent(continent, countryN)
@@ -48,9 +52,6 @@ public class App {
             List<City> japanCities = reports.getCitiesByCountry("Japan");
             reports.displayCitiesByCountry("Japan", japanCities);
 
-            /**
-             * all the population reports
-             */
             // Create an instance of PopulationReports with the database connection
             PopulationReports popReports = new PopulationReports(con);
 
@@ -69,7 +70,7 @@ public class App {
             List<Population> countryReports = popReports.getPopulationByCountry();
             popReports.displayPopulationReports(countryReports, "Country");
 
-            //Get world population
+           //world population
             long worldPop = popReports.getWorldPopulation();
             popReports.displayPopulation("World", worldPop);
 

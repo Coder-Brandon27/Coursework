@@ -141,11 +141,11 @@ public class PopulationReports {
 
     // Displays population reports with percentages
     public void displayPopulationReports(List<Population> reports, String reportType) {
+        if (reports == null) return; //this stops the crash
         System.out.println("\n=== Population Report by " + reportType + " ===");
         System.out.println(String.format("%-40s | %-15s | %-20s | %-20s",
                 reportType, "Total Pop.", "Urban Pop. (%)", "Rural Pop. (%)"));
         System.out.println("-".repeat(120));
-
         for (Population report : reports) {
             // Calculate percentages
             double urbanPercentage = (report.getTotalPopulation() > 0)
