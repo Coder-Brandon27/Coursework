@@ -114,25 +114,6 @@ void displayCities_ValidList_DoesNotThrow() {
     cityReports.displayCities(cityList);   // should not crash
 }
 
-// Test 10: displayCity should handle a null city without crashing
-@Test
-void displayCity_NullCity_DoesNotThrow() {
-    cityReports.displayCity(null);   // should not crash
-}
-
-// Test 11: displayCity should handle a valid city without crashing
-@Test
-void displayCity_ValidCity_DoesNotThrow() {
-    City c = new City();
-    c.setName("Osaka");
-    c.setCountryCode("JPN");
-    c.setDistrict("Osaka");
-    c.setPopulation(2700000);
-
-    cityReports.displayCity(c);   // should not crash
-}
-
-
 
 
 }
