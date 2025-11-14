@@ -80,6 +80,15 @@ public class CityReportsTest {
     void displayCities_NullList_DoesNotThrow() {
         cityReports.displayCities(null);   // should not crash
     }
+
+    // Test 7: displayCities should handle an empty list safely
+    @Test
+    void displayCities_EmptyList_DoesNotThrow() {
+    List<City> emptyList = new ArrayList<>();
+
+    cityReports.displayCities(emptyList);   // should not crash
+}
+
 }
 
 
