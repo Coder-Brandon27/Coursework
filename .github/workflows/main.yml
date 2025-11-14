@@ -33,10 +33,10 @@ jobs:
       - name: Integration Tests
         run: |
           docker build -t world ./db
-          docker run --name coursework-db-1 -dp 33060:3306 world
+          docker run --name db -dp 33060:3306 world
           mvn -Dtest=com.napier.devops.PopulationReportsTest test
-          docker stop coursework-db-1
-          docker rm coursework-db-1
+          docker stop db
+          docker rm db
           docker image rm world
   
 
