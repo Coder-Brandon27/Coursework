@@ -55,8 +55,8 @@ public class CityReports {
                 + "ORDER BY Population DESC";
 
         try (
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql)
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)
         ) {
             while (rs.next()) {
                 City c = new City();
@@ -175,10 +175,11 @@ public class CityReports {
 
         for (City c : cities) {
             System.out.println(
-                "  " + c.getName() + " | " +
-                c.getDistrict() + " | Pop: " + c.getPopulation()
+                    "  " + c.getName() + " | " +
+                    c.getDistrict() + " | Pop: " + c.getPopulation()
             );
         }
     }
 }
+
 
