@@ -9,12 +9,16 @@ public class PopulationReports {
     // Connection to the database
     private final Connection con;
 
-    // Constructor sets up the connection so we can use it in the methods below
+    /**
+     *     Constructor sets up the connection so we can use it in the methods below
+      */
     public PopulationReports(Connection con) {
         this.con = con;
     }
 
-    // Helper method to create a Population from a ResultSet row
+    /**
+     *     Helper method to create a Population from a ResultSet row
+      */
     private Population createPopulationReport(ResultSet rs) throws SQLException {
         Population report = new Population();
         report.setName(rs.getString("Name"));
@@ -24,7 +28,9 @@ public class PopulationReports {
         return report;
     }
 
-    // Gets population breakdown for each continent (urban vs rural)
+    /**
+     *   Gets population breakdown for each continent (urban vs rural)
+     */
 
     public List<Population> getPopulationByContinent() {
         List<Population> reports = new ArrayList<>();
@@ -60,6 +66,9 @@ public class PopulationReports {
         return reports;
     }
 
+    /**
+     *   Gets population breakdown for each continent (urban vs rural)
+     */
     // Gets population breakdown for each region (urban vs rural)
     public List<Population> getPopulationByRegion() {
         List<Population> reports = new ArrayList<>();
@@ -100,7 +109,9 @@ public class PopulationReports {
         return reports;
     }
 
-    // Gets population breakdown for each country (urban vs rural)
+    /**
+     *   Gets population breakdown for each country (urban vs rural)
+     */
     public List<Population> getPopulationByCountry() {
         List<Population> reports = new ArrayList<>();
 
@@ -139,7 +150,11 @@ public class PopulationReports {
         return reports;
     }
 
-    // Displays population reports with percentages
+    /**
+     *    // Displays population reports with percentages
+     * @param reports
+     * @param reportType
+     */
     public void displayPopulationReports(List<Population> reports, String reportType) {
         if (reports == null) return; //this stops the crash
         System.out.println("\n=== Population Report by " + reportType + " ===");
@@ -167,7 +182,9 @@ public class PopulationReports {
         System.out.println();
     }
 
-    // Gets the total population of the world
+    /**
+     *    Gets the total population of the world
+     */
     public long getWorldPopulation() {
         long population = 0;
 
