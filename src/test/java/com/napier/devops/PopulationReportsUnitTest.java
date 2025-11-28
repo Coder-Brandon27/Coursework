@@ -22,7 +22,7 @@ public class PopulationReportsUnitTest {
     public void testDisplayPopulationReportsEmptyList() {
         List<Population> list = new ArrayList<>();
         reports.displayPopulationReports(list, "Empty Test");
-        assertTrue(true); // simple assertion to validate test reached this point
+        assertTrue(true);
     }
 
     /**
