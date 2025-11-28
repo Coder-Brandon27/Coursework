@@ -1,5 +1,8 @@
 name: A workflow for coursework
 
+permissions:
+  contents: write
+
 on:
   push:
     branches:
